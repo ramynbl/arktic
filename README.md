@@ -88,7 +88,7 @@ VITE_APP_ID=arktic
 VITE_APP_TITLE=Arktic
 
 JWT_SECRET=votre-secret-jwt
-DATABASE_URL=mysql://user:password@localhost:3306/arktic
+DATABASE_URL=votre-url-ici
 ADMIN_PASSWORD=votre-mot-de-passe-admin
 ```
 
