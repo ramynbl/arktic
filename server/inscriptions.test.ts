@@ -90,15 +90,18 @@ describe("inscriptions", () => {
   });
 
   describe("list", () => {
-    it("should return list of inscriptions for an event", async () => {
+    it("should reject unauthenticated access", async () => {
       const ctx = createPublicContext();
       const caller = appRouter.createCaller(ctx);
 
-      const inscriptions = await caller.inscriptions.list({
-        eventId: "prochain-event",
-      });
-
-      expect(Array.isArray(inscriptions)).toBe(true);
+      try {
+        await caller.inscriptions.list({
+          eventId: "prochain-event",
+        });
+        expect.fail("Should have thrown a FORBIDDEN error");
+      } catch (error: any) {
+        expect(error.code).toBe("FORBIDDEN");
+      }
     });
   });
 });

@@ -1,4 +1,3 @@
-import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
@@ -7,8 +6,6 @@ import Inscription from "./Inscription";
 import { trpc } from "@/lib/trpc";
 
 export default function Home() {
-  // The userAuth hooks provides authentication state
-  const { user, loading, error, isAuthenticated, logout } = useAuth();
 
   // Récupérer le nombre d'inscriptions
   const { data: inscriptionCount = 0 } = trpc.inscriptions.count.useQuery({
@@ -70,7 +67,7 @@ export default function Home() {
                   Session Escalade Arkose
                 </h2>
                 <p className="text-xl text-foreground/70 mb-6">
-                  Rejoins-nous pour une session d'escalade inoubliable à Arkose Montreuil ! Que tu sois débutant ou confirmé, 
+                  Rejoins-nous pour une session d'escalade inoubliable à Arkose Montreuil ! Que tu sois débutant ou confirmé,
                   nos moniteurs expérimentés seront là pour te guider et te faire progresser dans une ambiance conviviale et fun.
                 </p>
               </div>
@@ -92,7 +89,7 @@ export default function Home() {
                   </div>
                   <div>
                     <p className="font-semibold">Horaire</p>
-                    <p className="text-foreground/70">Mardi 10 Février, 17h30</p>
+                    <p className="text-foreground/70">Mardi 17 Février, 17h30</p>
                   </div>
                 </div>
 

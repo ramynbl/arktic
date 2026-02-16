@@ -36,7 +36,7 @@ export default function Contact() {
     },
     {
       question: "Quel est le prix des événements ?",
-      answer: "Les prix varient selon l'événement. Pour l'escalade à Arkose, compte environ 15-20€ (entrée + location de chaussons). Les afterworks sont souvent gratuits ou à prix réduit.",
+      answer: "Les prix varient selon l'événement. Pour l'escalade à Arkose et si tu es étiduant à HETIC, c'est 10€ au lieu de 19€ ! Les afterworks sont souvent à prix réduit.",
     },
     {
       question: "Dois-je être étudiant à HETIC pour participer ?",
@@ -45,10 +45,6 @@ export default function Contact() {
     {
       question: "Comment puis-je rejoindre l'équipe organisatrice ?",
       answer: "Tu es motivé pour nous aider à organiser des événements ? Contacte-nous via le formulaire ou sur Instagram, on cherche toujours des personnes passionnées !",
-    },
-    {
-      question: "Y a-t-il un groupe WhatsApp ou Discord ?",
-      answer: "Oui ! Une fois inscrit à ton premier événement, tu recevras un lien pour rejoindre notre communauté en ligne où on partage infos, photos et bonne humeur.",
     },
   ];
 
@@ -81,6 +77,7 @@ export default function Contact() {
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       required
+                      className="placeholder:italic placeholder:text-muted-foreground/60"
                     />
                   </div>
                   <div>
@@ -94,6 +91,7 @@ export default function Contact() {
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       required
+                      className="placeholder:italic placeholder:text-muted-foreground/60"
                     />
                   </div>
                   <div>
@@ -107,6 +105,7 @@ export default function Contact() {
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       required
+                      className="placeholder:italic placeholder:text-muted-foreground/60"
                     />
                   </div>
                   <Button type="submit" className="w-full">
@@ -127,7 +126,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-bold text-lg mb-1">Email</h3>
-                    <p className="text-foreground/70">contact@arktic.com</p>
+                    <p className="text-foreground/70">arkticgrimpe@outlook.fr</p>
                     <p className="text-sm text-foreground/60 mt-1">
                       On répond sous 24h max !
                     </p>
@@ -146,10 +145,31 @@ export default function Contact() {
                     <h3 className="font-bold text-lg mb-1">Lieu principal</h3>
                     <p className="text-foreground/70">Arkose Montreuil</p>
                     <p className="text-sm text-foreground/60 mt-1">
+                        27 bis Rue du Progrès
+                      </p>
+                    <p className="text-sm text-foreground/60 mt-1">
                       93100 Montreuil
                     </p>
                   </div>
                 </div>
+
+                <div className="hidden md:block w-[1px] bg-border my-1"></div>
+
+                   <div className="flex items-start gap-4 flex-1">
+                    <div className="p-3 bg-primary/10 rounded-lg shrink-0">
+                      <MapPin size={24} className="text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-lg mb-1">Campus</h3>
+                      <p className="text-foreground/70">HETIC</p>
+                      <p className="text-sm text-foreground/60 mt-1">
+                        27 bis Rue du Progrès
+                      </p>
+                      <p className="text-sm text-foreground/60 mt-1">
+                        93100 Montreuil
+                      </p>
+                    </div>
+                  </div>
               </CardContent>
             </Card>
 
@@ -158,22 +178,13 @@ export default function Contact() {
                 <h3 className="font-bold text-lg mb-4">Réseaux sociaux</h3>
                 <div className="flex gap-4">
                   <a
-                    href="https://instagram.com"
+                    href="https://www.instagram.com/athlhetic/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 px-4 py-2 bg-primary/10 hover:bg-primary/20 rounded-lg transition-colors"
                   >
                     <Instagram size={20} className="text-primary" />
                     <span className="font-medium">Instagram</span>
-                  </a>
-                  <a
-                    href="https://facebook.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-4 py-2 bg-primary/10 hover:bg-primary/20 rounded-lg transition-colors"
-                  >
-                    <Facebook size={20} className="text-primary" />
-                    <span className="font-medium">Facebook</span>
                   </a>
                 </div>
               </CardContent>
