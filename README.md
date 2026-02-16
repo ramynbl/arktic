@@ -160,10 +160,10 @@ Fonctionnalités admin :
 | Membre | Rôle |
 |---|---|
 | **Ramy Nebili** | Développement web & intégration |
-| **Noé Chauvin** | Membre du projet |
+| **Noé Chauvin** | Chef de projet |
 | **Nassim Saadaoui** | Membre du projet |
 | **Douglas Quintero** | Membre du projet |
-| **Abdelkrim** | Membre du projet |
+| **Abdelkrim** | Communication |
 
 > Projet réalisé dans le cadre du **projet communauté** — HETIC B1 2026
 
