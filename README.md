@@ -160,8 +160,8 @@ Fonctionnalités admin :
 | Membre | Rôle |
 |---|---|
 | **Ramy Nebili** | Développement web & intégration |
+| **Nassim Saadaoui** @NassimsDev | Développeur Frontend & intégration |
 | **Noé Chauvin** | Chef de projet |
-| **Nassim Saadaoui** | Membre du projet |
 | **Douglas Quintero** | Membre du projet |
 | **Abdelkrim** | Communication |
 
