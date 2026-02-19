@@ -5,15 +5,16 @@ export default function Gallery() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const galleryImages = [
-    { src: "/hero-climbing.jpg", alt: "Session escalade en groupe", category: "Escalade" },
-    { src: "/climbing-action.jpg", alt: "Grimpeur en action", category: "Escalade" },
-    { src: "/petanque.jpg", alt: "Afterwork pétanque", category: "Afterwork" },
-    { src: "/hero-climbing.jpg", alt: "Mur d'escalade coloré", category: "Escalade" },
-    { src: "/climbing-action.jpg", alt: "Concentration maximale", category: "Escalade" },
-    { src: "/petanque.jpg", alt: "Moment convivial", category: "Afterwork" },
-    { src: "/hero-climbing.jpg", alt: "Défi relevé", category: "Escalade" },
-    { src: "/climbing-action.jpg", alt: "Session du soir", category: "Escalade" },
-    { src: "/petanque.jpg", alt: "Pétanque entre amis", category: "Afterwork" },
+    { src: "/gallery/gallery-1.jpg", alt: "Que du love chez Arktic !", category: "Afterwork" },
+    { src: "/gallery/gallery-2.jpg", alt: "Grimpeur en action", category: "Escalade" },
+    { src: "/gallery/gallery-3.jpg", alt: "Grimpeur en action", category: "Escalade" },
+    { src: "/gallery/gallery-4.jpg", alt: "Mur d'escalade coloré", category: "Escalade" },
+    { src: "/gallery/gallery-5.jpg", alt: "Concentration maximale", category: "Escalade" },
+    { src: "/gallery/gallery-6.jpg", alt: "Ça grimpe, ça grimpe !", category: "Escalade" },
+    { src: "/gallery/gallery-7.jpg", alt: "Des sourires partagés", category: "Escalade" },
+    { src: "/gallery/gallery-8.jpg", alt: "Des moments conviviaux", category: "Afterwork" },
+    { src: "/gallery/gallery-9.jpg", alt: "Défi relevé !", category: "Escalade" },
+    { src: "/gallery/gallery-10.jpg", alt: "Une team qui grimpe (Ou pas !)", category: "Escalade" },
   ];
 
   return (
