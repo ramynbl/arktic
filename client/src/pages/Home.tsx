@@ -89,7 +89,7 @@ export default function Home() {
                   </div>
                   <div>
                     <p className="font-semibold">Horaire</p>
-                    <p className="text-foreground/70">!! PROCHAIN EVENT TRÈS BIENTÔT !!<br></br>Vous pouvez vous inscrire dès maintenant sur le site ! <br />Vous serez notifier par mail du prochain event.</p>
+                    <p className="text-foreground/70">Mardi 03 Mars 2026 - 17h30</p>
                   </div>
                 </div>
 
