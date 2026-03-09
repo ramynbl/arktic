@@ -89,7 +89,7 @@ export default function Home() {
                   </div>
                   <div>
                     <p className="font-semibold">Horaire</p>
-                    <p className="text-foreground/70">Mardi 03 Mars 2026 - 17h30</p>
+                    <p className="text-foreground/70">Mardi 18 Mars 2026 - 17h30</p>
                   </div>
                 </div>
 
