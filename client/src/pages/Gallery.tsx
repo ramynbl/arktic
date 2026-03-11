@@ -1,10 +1,35 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { X } from "lucide-react";
+import { sanityClient, urlFor } from '../sanity'
 
 export default function Gallery() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
-  const galleryImages = [
+  // Mettre à jour avec : { src: urlFor(image.image).url(), alt: image.altText } ... mais le faire au moment du render pour plus de simplicité ou après fetch.
+  // On va plutôt stocker et structurer ça dans les sanityImages directement.
+  const [sanityImages, setSanityImages] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    sanityClient.fetch('*[_type == "galleryItem"]')
+      .then((data) => {
+        // Optionnel: on peut formater les images reçues pour qu'elles aient la forme qu'attend ton code
+        const formattedImages = data.map((img: any) => ({
+          src: urlFor(img.image).url(),
+          title: img.title || "",
+          alt: img.altText || "Image événement",
+          category: img.category || ""
+        }));
+        setSanityImages(formattedImages);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Erreur de connexion à Sanity :", error);
+        setIsLoading(false);
+      });
+  }, []);
+
+  const oldGalleryImagesLocal = [
     { src: "/gallery/gallery-1.jpg", alt: "Que du love chez Arktic !", category: "Afterwork" },
     { src: "/gallery/gallery-2.jpg", alt: "Grimpeur en action", category: "Escalade" },
     { src: "/gallery/gallery-3.jpg", alt: "Grimpeur en action", category: "Escalade" },
@@ -30,25 +55,35 @@ export default function Gallery() {
 
         {/* Gallery Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {galleryImages.map((image, index) => (
-            <div
-              key={index}
-              className="relative group cursor-pointer overflow-hidden rounded-lg aspect-square"
-              onClick={() => setSelectedImage(image.src)}
-            >
-              <img
-                src={image.src}
-                alt={image.alt}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                <div>
-                  <p className="text-white font-semibold">{image.alt}</p>
-                  <p className="text-white/80 text-sm">{image.category}</p>
+          {isLoading ? (
+            <div className="col-span-full py-20 text-center text-xl text-foreground/50">
+              Chargement de la galerie...
+            </div>
+          ) : sanityImages.length === 0 ? (
+            <div className="col-span-full py-20 text-center text-xl text-foreground/50">
+              Ajoute vite des photos depuis le tableau de bord Sanity !
+            </div>
+          ) : (
+            sanityImages.map((image, index) => (
+              <div
+                key={index}
+                className="relative group cursor-pointer overflow-hidden rounded-lg aspect-square"
+                onClick={() => setSelectedImage(image.src)}
+              >
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                  <div>
+                    <p className="text-white font-semibold">{image.title || image.alt}</p>
+                    {image.category && <p className="text-white/80 text-sm">{image.category}</p>}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
 
         {/* Info Section */}
@@ -71,25 +106,27 @@ export default function Gallery() {
       </div>
 
       {/* Lightbox Modal */}
-      {selectedImage && (
-        <div
-          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
-          onClick={() => setSelectedImage(null)}
-        >
-          <button
-            className="absolute top-4 right-4 p-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors"
+      {
+        selectedImage && (
+          <div
+            className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
             onClick={() => setSelectedImage(null)}
           >
-            <X size={24} className="text-white" />
-          </button>
-          <img
-            src={selectedImage}
-            alt="Image agrandie"
-            className="max-w-full max-h-full object-contain"
-            onClick={(e) => e.stopPropagation()}
-          />
-        </div>
-      )}
-    </div>
+            <button
+              className="absolute top-4 right-4 p-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors"
+              onClick={() => setSelectedImage(null)}
+            >
+              <X size={24} className="text-white" />
+            </button>
+            <img
+              src={selectedImage}
+              alt="Image agrandie"
+              className="max-w-full max-h-full object-contain"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </div>
+        )
+      }
+    </div >
   );
 }

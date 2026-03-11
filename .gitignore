@@ -105,3 +105,11 @@ temp/
 *.db
 *.sqlite
 *.sqlite3
+
+# Sanity CMS
+arktic-studio/.sanity/
+arktic-studio/dist/
+arktic-studio/*.log
+
+# Documentation interne
+docs/

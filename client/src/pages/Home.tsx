@@ -1,11 +1,25 @@
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import SectionDivider from "@/components/SectionDivider";
 import Inscription from "./Inscription";
 import { trpc } from "@/lib/trpc";
+import { sanityClient, urlFor } from "../sanity";
 
 export default function Home() {
+  const [heroInfo, setHeroInfo] = useState<any>(null);
+
+  useEffect(() => {
+    // La requête GROQ va chercher le premier document de type 'heroInfo'
+    sanityClient.fetch('*[_type == "heroInfo"][0]')
+      .then((data) => {
+        if (data) {
+          setHeroInfo(data);
+        }
+      })
+      .catch((error) => console.error("Erreur Sanity:", error));
+  }, []);
 
   // Récupérer le nombre d'inscriptions
   const { data: inscriptionCount = 0 } = trpc.inscriptions.count.useQuery({
@@ -64,11 +78,10 @@ export default function Home() {
             <div className="space-y-6">
               <div>
                 <h2 className="text-4xl md:text-5xl font-bold mb-4 text-primary">
-                  Session Escalade Arkose
+                  {heroInfo ? heroInfo.title : "Session Escalade Arkose"}
                 </h2>
                 <p className="text-xl text-foreground/70 mb-6">
-                  Rejoins-nous pour une session d'escalade inoubliable à Arkose Montreuil ! Que tu sois débutant ou confirmé,
-                  nos moniteurs expérimentés seront là pour te guider et te faire progresser dans une ambiance conviviale et fun.
+                  {heroInfo ? heroInfo.description : "Rejoins-nous pour une session d'escalade inoubliable à Arkose Montreuil ! Que tu sois débutant ou confirmé, nos moniteurs expérimentés seront là pour te guider et te faire progresser dans une ambiance conviviale et fun."}
                 </p>
               </div>
 
@@ -79,7 +92,7 @@ export default function Home() {
                   </div>
                   <div>
                     <p className="font-semibold">Lieu</p>
-                    <p className="text-foreground/70">Arkose Montreuil, 93100 Montreuil</p>
+                    <p className="text-foreground/70">{heroInfo ? heroInfo.location : "Arkose Montreuil, 93100 Montreuil"}</p>
                   </div>
                 </div>
 
@@ -89,7 +102,7 @@ export default function Home() {
                   </div>
                   <div>
                     <p className="font-semibold">Horaire</p>
-                    <p className="text-foreground/70">Mardi 17 Mars 2026 - 17h30</p>
+                    <p className="text-foreground/70">{heroInfo ? heroInfo.schedule : "Mardi 17 Mars 2026 - 17h30"}</p>
                   </div>
                 </div>
 
@@ -123,13 +136,13 @@ export default function Home() {
             <div className="hidden lg:block">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <img
-                  src="/climbing-action.jpg"
-                  alt="Session Escalade Arkose"
+                  src={heroInfo && heroInfo.coverImage ? urlFor(heroInfo.coverImage).width(800).url() : "/climbing-action.jpg"}
+                  alt={heroInfo ? heroInfo.title : "Session Escalade Arkose"}
                   className="w-full h-96 object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/40 via-transparent to-transparent" />
                 <div className="absolute bottom-6 left-6 right-6 text-white">
-                  <p className="text-sm font-semibold opacity-90">Arkose Montreuil</p>
+                  <p className="text-sm font-semibold opacity-90">{heroInfo && heroInfo.location ? heroInfo.location.split(',')[0] : "Arkose Montreuil"}</p>
                   <p className="text-2xl font-bold">Grimpe & Partage</p>
                 </div>
               </div>

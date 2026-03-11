@@ -15,6 +15,7 @@
   <img src="https://img.shields.io/badge/tRPC-11-398CCB?logo=trpc&logoColor=white" alt="tRPC" />
   <img src="https://img.shields.io/badge/MySQL-8-4479A1?logo=mysql&logoColor=white" alt="MySQL" />
   <img src="https://img.shields.io/badge/Drizzle_ORM-0.41-C5F74F?logo=drizzle&logoColor=black" alt="Drizzle" />
+  <img src="https://img.shields.io/badge/Sanity-CMS-F03E2F?logo=sanity&logoColor=white" alt="Sanity CMS" />
 </p>
 
 ---
@@ -31,12 +32,12 @@ Le front-end initial a été généré via [Manus](https://manus.im/), puis le p
 
 | Feature | Description |
 |---|---|
-| 🏠 **Landing page** | Hero section, présentation de l'association, prochains événements |
+| 🏠 **Landing page** | Hero section, présentation de l'association, infos du prochain événement dynamiques (Sanity) |
 | 📝 **Inscription en ligne** | Formulaire d'inscription aux sessions d'escalade avec jauge de places restantes |
 | 🔐 **Panneau admin** | Interface protégée par mot de passe pour gérer les inscriptions |
 | 📊 **Gestion des inscriptions** | Visualisation, suppression individuelle / en lot / totale |
 | 📥 **Export CSV** | Téléchargement de la liste des inscrits au format CSV |
-| 📸 **Galerie** | Photos des sessions et événements passés |
+| 📸 **Galerie** | Photos des sessions et événements gérées dynamiquement via Sanity |
 | 📬 **Contact** | Formulaire de contact |
 | 📱 **Responsive** | Design adapté mobile, tablette et desktop |
 
@@ -45,18 +46,24 @@ Le front-end initial a été généré via [Manus](https://manus.im/), puis le p
 ## 🛠️ Stack technique
 
 ### Front-end
+
 - **React 19** + **TypeScript**
 - **Vite 7** — build & dev server
 - **Shadcn/UI** — composants UI
 - **Wouter** — routing
 - **Lucide React** — icônes
 
-### Back-end
+### Back-end & BDD
+
 - **Express** — serveur HTTP
 - **tRPC 11** — API type-safe
 - **Drizzle ORM** — requêtes SQL type-safe
 - **MySQL** — base de données (Railway en prod)
 - **Jose** — JWT pour l'authentification admin
+
+### Gestion de Contenu (CMS)
+
+- **Sanity CMS** — (Dossier `arktic-studio`) pour gérer dynamiquement la galerie photo et les dates des prochains événements. Consulter le [TUTO_SANITY.md](./TUTO_SANITY.md) pour la prise en main complète.
 
 ---
 
@@ -147,6 +154,7 @@ L'interface d'administration est accessible sur `/admin/inscriptions`.
 L'authentification se fait via le mot de passe défini dans `ADMIN_PASSWORD`.
 
 Fonctionnalités admin :
+
 - Voir toutes les inscriptions
 - Sélection multiple (checkboxes)
 - Suppression individuelle, en lot, ou totale
